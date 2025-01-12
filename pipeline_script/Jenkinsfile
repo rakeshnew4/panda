@@ -19,7 +19,7 @@ spec:
         stage("Deploy") {
             steps {
                 container("dockerindocker"){
-                sh "docker --version"  // Run shell command to list files
+                sh "docker build -t 058264520519.dkr.ecr.us-east-1.amazonaws.com/panda:v1"  // Run shell command to list files
                 echo "Hello, Jenkins!"  // Print a message
                 }
 
