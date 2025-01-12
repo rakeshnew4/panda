@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: dockerindocker
-    image: docker:27.4.0-rc.1-dind
+    image: docker:1.2.0
     tty: true
 """
         }
