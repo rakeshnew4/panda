@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: dockerindocker
-    image: docker:1.2.0
+    image: desmart/dind:latest
     tty: true
     securityContext:
         privileged: true
@@ -22,7 +22,7 @@ spec:
             steps {
                 container("dockerindocker"){
                 sh "ls"
-                sh "docker buildx build -t panda:v1 ."  // Run shell command to list files
+                sh "docker build -t panda:v1 ."  // Run shell command to list files
                 echo "Hello, Jenkins!"  // Print a message
                 }
 
