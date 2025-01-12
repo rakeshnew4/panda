@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: dockerindocker
-    image: summerwind/actions-runner-dind:v2.313.0-ubuntu-20.04
+    image: docker:dind
     tty: true
 """
         }
