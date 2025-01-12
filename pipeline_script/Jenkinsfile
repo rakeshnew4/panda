@@ -12,6 +12,8 @@ spec:
   - name: dockerindocker
     image: docker:1.2.0
     tty: true
+    securityContext:
+        privileged: true
 """
         }
     }
@@ -20,7 +22,7 @@ spec:
             steps {
                 container("dockerindocker"){
                 sh "ls"
-                sh "docker build -t 058264520519.dkr.ecr.us-east-1.amazonaws.com/panda:v1 ."  // Run shell command to list files
+                sh "sudo docker build -t 058264520519.dkr.ecr.us-east-1.amazonaws.com/panda:v1 ."  // Run shell command to list files
                 echo "Hello, Jenkins!"  // Print a message
                 }
 
