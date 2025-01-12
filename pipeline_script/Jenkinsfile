@@ -10,10 +10,8 @@ metadata:
 spec:
   containers:
   - name: dockerindocker
-    image: summerwind/actions-runner-dind:v2.321.0-ubuntu-20.04
+    image: summerwind/actions-runner-dind:v2.313.0-ubuntu-20.04
     tty: true
-    securityContext:
-        privileged: true
 """
         }
     }
@@ -21,7 +19,6 @@ spec:
         stage("Deploy") {
             steps {
                 container("dockerindocker"){
-                sh "ls"
                 sh "docker build -t panda:v1 ."  // Run shell command to list files
                 echo "Hello, Jenkins!"  // Print a message
                 }
