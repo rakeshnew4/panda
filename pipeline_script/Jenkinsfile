@@ -9,7 +9,7 @@ metadata:
     some-label: my-pipeline-pod
 spec:
   containers:
-  - name: docker_in_docker
+  - name: dockerindocker
     image: 27.4.0-rc.1-dind
     tty: true
 """
@@ -18,7 +18,7 @@ spec:
     stages {
         stage("Deploy") {
             steps {
-                container("docker_in_docker"){
+                container("dockerindocker"){
                 sh "docker --version"  // Run shell command to list files
                 echo "Hello, Jenkins!"  // Print a message
                 }
