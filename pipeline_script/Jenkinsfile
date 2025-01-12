@@ -22,15 +22,12 @@ spec:
             steps {
                 container("dockerindocker") {
                     sh """
-                    # Start the Docker daemon
+
                     dockerd &
-                    sleep 5  # Wait for Docker to start
-                    
-                    # Verify Docker is running
+                    sleep 5 
                     docker info
-                    
-                    # Build the Docker image
-                    docker build -t panda:v1 .
+                    docker build -t 058264520519.dkr.ecr.us-east-1.amazonaws.com/panda:v1 .
+                    docker push 058264520519.dkr.ecr.us-east-1.amazonaws.com/panda:v1
                     """
                     echo "Hello, Jenkins!"
                 }
