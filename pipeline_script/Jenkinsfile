@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: dockerindocker
-    image: desmart/dind:latest
+    image: rawkode/docker-dind-gcloud:latest
     tty: true
     securityContext:
         privileged: true
