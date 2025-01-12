@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: dockerindocker
-    image: rawkode/docker-dind-gcloud:latest
+    image: summerwind/actions-runner-dind:v2.321.0-ubuntu-20.04
     tty: true
     securityContext:
         privileged: true
