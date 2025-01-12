@@ -1,9 +1,11 @@
-pipeline{
-    agent any
+pipeline {
+    agent any  // Specify the agent to run the pipeline
     stages {
-        stage("deploy"){
-            sh "ls"
-            echo "ejllooo"
+        stage("Deploy") {
+            steps {
+                sh "ls"  // Run shell command to list files
+                echo "Hello, Jenkins!"  // Print a message
+            }
         }
     }
 }
