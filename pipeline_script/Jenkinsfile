@@ -10,29 +10,38 @@ metadata:
 spec:
   containers:
   - name: dockerindocker
-    image: docker:1.2.0
-    tty: true
+    image: docker:24.0-dind
     securityContext:
-        privileged: true
+      privileged: true
+    command:
+    - dockerd-entrypoint.sh
+    args:
+    - --host=tcp://0.0.0.0:2375
+    - --host=unix:///var/run/docker.sock
     volumeMounts:
     - name: docker-sock
       mountPath: /var/run/docker.sock
   volumes:
   - name: docker-sock
-    hostPath:
-      path: /var/run/docker.sock
+    emptyDir: {}
 """
         }
     }
     stages {
         stage("Deploy") {
             steps {
-                container("dockerindocker"){
-                sh "ls"
-                sh "docker build -t 058264520519.dkr.ecr.us-east-1.amazonaws.com/panda:v1 ."  // Run shell command to list files
-                echo "Hello, Jenkins!"  // Print a message
+                container("dockerindocker") {
+                    sh """
+                    # Ensure Docker daemon is running
+                    dockerd &
+                    sleep 5  # Wait for the Docker daemon to initialize
+                    docker info  # Verify Docker daemon is accessible
+                    
+                    # Build Docker image
+                    docker build -t 058264520519.dkr.ecr.us-east-1.amazonaws.com/panda:v1 .
+                    """
+                    echo "Docker image built successfully!"
                 }
-
             }
         }
     }
