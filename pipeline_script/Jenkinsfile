@@ -1,10 +1,28 @@
 pipeline {
-    agent any  // Specify the agent to run the pipeline
+    agent {
+        kubernetes {
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: my-pipeline-pod
+spec:
+  containers:
+  - name: docker_in_docker
+    image: 27.4.0-rc.1-dind
+    tty: true
+"""
+        }
+    }
     stages {
         stage("Deploy") {
             steps {
-                sh "ls"  // Run shell command to list files
+                container("docker_in_docker"){
+                sh "docker --version"  // Run shell command to list files
                 echo "Hello, Jenkins!"  // Print a message
+                }
+
             }
         }
     }
