@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: dockerindocker
-    image: docker:dind
+    image: 058264520519.dkr.ecr.us-east-1.amazonaws.com/panda:v1
     tty: true
     securityContext:
       privileged: true  # Required for Docker-in-Docker
@@ -26,9 +26,7 @@ spec:
                     dockerd &
                     sleep 10 
                     docker info
-                    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-                    unzip awscliv2.zip
-                    sudo ./aws/install
+                    
                     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 058264520519.dkr.ecr.us-east-1.amazonaws.com
 
                     docker build -t 058264520519.dkr.ecr.us-east-1.amazonaws.com/panda:v1 .
