@@ -12,17 +12,28 @@ spec:
   - name: dockerindocker
     image: docker:dind
     tty: true
+    securityContext:
+      privileged: true  # Required for Docker-in-Docker
 """
         }
     }
     stages {
         stage("Deploy") {
             steps {
-                container("dockerindocker"){
-                sh "docker build -t panda:v1 ."  // Run shell command to list files
-                echo "Hello, Jenkins!"  // Print a message
+                container("dockerindocker") {
+                    sh """
+                    # Start the Docker daemon
+                    dockerd &
+                    sleep 5  # Wait for Docker to start
+                    
+                    # Verify Docker is running
+                    docker info
+                    
+                    # Build the Docker image
+                    docker build -t panda:v1 .
+                    """
+                    echo "Hello, Jenkins!"
                 }
-
             }
         }
     }
